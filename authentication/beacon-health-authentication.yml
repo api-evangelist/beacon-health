@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.beaconhealth.ai/.well-known/openid-configuration
+description: >-
+  Beacon Health publishes no public developer API and no OpenAPI definition, so
+  there are no securitySchemes to derive from. This profile is captured from the
+  live OIDC discovery document served by the application backend host
+  (api.beaconhealth.ai) plus the published Terms of Service and Privacy Policy.
+  The discovery document advertises an issuer and a working JWKS endpoint, which
+  indicates JWT-based session authentication for the first-party Beacon Health
+  web application; the advertised authorization_endpoint returns 404, so this is
+  NOT a public OAuth authorization server that third-party developers can
+  register with. Human end users authenticate through the web application at
+  https://www.beaconhealth.ai/login. Access to the platform requires
+  authorization by a subscribing healthcare organization (Terms of Service §3).
+summary:
+  types:
+    - openIdConnect
+  public_developer_auth: false
+  self_serve_signup: false
+  notes: >-
+    First-party application authentication only. No documented API keys, no
+    published OAuth client registration, no developer credentials.
+schemes:
+  - name: BeaconHealthApplicationJWT
+    type: openIdConnect
+    issuer: https://api.beaconhealth.ai
+    jwks_uri: https://api.beaconhealth.ai/.well-known/jwks.json
+    jwks_keys: 1
+    jwks_algorithms:
+      - RSA
+    authorization_endpoint: https://api.beaconhealth.ai/oauth/authorize
+    authorization_endpoint_status: 404
+    token_endpoint: null
+    scopes_advertised: []
+    sources:
+      - well-known/beacon-health-openid-configuration.json
+      - well-known/beacon-health-jwks.json
+human_login: https://www.beaconhealth.ai/login
+access_control:
+  model: organization-provisioned
+  evidence: >-
+    "To use our Services, you must be at least 18 years old and authorized by a
+    subscribing healthcare organization." — Terms of Service §3,
+    https://www.beaconhealth.ai/terms
