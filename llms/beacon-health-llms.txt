@@ -1,0 +1,46 @@
+# Beacon Health
+
+> Beacon Health (YC W26) builds "AI employees" for primary care — autonomous agents that operate directly inside electronic health record systems the way a human staff member does. A practice records an existing EHR workflow (navigation, clicks, data entry) and Beacon converts that recording into a reusable, deployable agent that runs at scale across the whole patient panel.
+
+Founded 2025 in San Francisco by Mark Pothen (CEO) and Obinna Akahara (CTO). Backed by Y Combinator (Winter 2026 batch).
+
+## What it does
+
+- Automates value-based-care back-office work: quality gap closure, preventative screening outreach, pre-charting, prior authorizations, referrals, transition-of-care management, and HCC risk-adjustment coding.
+- Drives EHR user interfaces directly rather than integrating through vendor data APIs. Advertised coverage: AthenaHealth, Epic, Cerner, eClinicalWorks, MEDITECH, NextGen, Veradigm Allscripts, MEDENT — plus payer portals and other web applications.
+- Agents can be chained into multi-step, long-horizon pipelines without human hand-offs, with monitoring controls to pause, review, or intervene.
+- Target customers are organizations under risk-based contracts: Independent Physician Associations, Accountable Care Organizations, integrated networks, and direct-to-employer operators.
+
+## API status
+
+Beacon Health publishes **no public developer API**. As of 2026-07-20 there is no developer portal, no API documentation, no API reference, no OpenAPI or AsyncAPI definition, no SDKs in any public package registry (npm, PyPI), no CLI, no MCP server, no public GitHub organization, no changelog, no status page, and no pricing page. The product is sold as a managed agent workforce through a demo/sales motion, not as a self-serve API.
+
+The application backend at `api.beaconhealth.ai` is a Convex-hosted service that serves an OIDC discovery document and a JWKS for first-party application session authentication. Its advertised `authorization_endpoint` returns 404 and there is no client registration, so it is not usable as a third-party developer authorization server.
+
+## Links
+
+- [Website](https://www.beaconhealth.ai/): Product overview, how it works, integrations, use cases
+- [Log In](https://www.beaconhealth.ai/login): Application sign-in (organization-provisioned access only)
+- [Book a Demo](https://form.typeform.com/to/mJ8w6Xot): Sales contact form
+- [Terms of Service](https://www.beaconhealth.ai/terms): Last updated 2026-04-01, governed by Massachusetts law
+- [Privacy Policy](https://www.beaconhealth.ai/privacy): Last updated 2026-04-01, includes HIPAA Business Associate terms
+- [Y Combinator profile](https://www.ycombinator.com/companies/beacon-health): Batch W26 company page
+- [LinkedIn](https://www.linkedin.com/company/beacon-health-ai/): Company page
+
+## Compliance
+
+- HIPAA Business Associate operating under a BAA executed with each covered entity; commits to HIPAA Security Rule administrative, physical, and technical safeguards.
+- No published third-party audit attestation (no SOC 2, ISO 27001, or HITRUST report available publicly).
+- Contacts: privacy@beaconhealth.ai (privacy), legal@beaconhealth.ai (legal). No security.txt and no published vulnerability disclosure program.
+
+## API Evangelist artifacts
+
+- [apis.yml](https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/apis.yml): APIs.json profile for this company
+- [Well-Known index](https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/well-known/beacon-health-well-known.yml): Probed /.well-known/ discovery surface with HTTP statuses
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/authentication/beacon-health-authentication.yml): Authentication profile captured from the live OIDC discovery document
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/conformance/beacon-health-conformance.yml): Standards and compliance posture with evidence
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/security/beacon-health-domain-security.yml): Probed TLS, HSTS, DNSSEC, CAA, SPF, DMARC
+
+## Notes
+
+Not to be confused with **Beacon Health System**, the hospital network in South Bend, Indiana, or with **Beacon Health Options**, the behavioral health managed-care organization. This profile covers only Beacon Health (beaconhealth.ai), the Y Combinator W26 AI company.

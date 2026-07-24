@@ -1,0 +1,1 @@
+{"issuer":"https://api.beaconhealth.ai","jwks_uri":"https://api.beaconhealth.ai/.well-known/jwks.json","authorization_endpoint":"https://api.beaconhealth.ai/oauth/authorize"}

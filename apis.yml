@@ -1,20 +1,91 @@
 aid: beacon-health
 name: Beacon Health
-description: Beacon Health is a company surfaced as a portfolio company of y-combinator and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Beacon Health (YC W26) is a San Francisco company building "AI employees" for
+  primary care — autonomous agents that operate directly inside electronic health
+  record systems the same way a human staff member does. Rather than integrating
+  through an EHR vendor API, Beacon records a practice's existing workflow in the
+  EHR (navigation, clicks, data entry) and converts that recording into a
+  reusable, deployable agent that runs at scale across the whole patient panel.
+  The agents automate value-based-care back-office work: preventative and quality
+  gap closure, pre-charting, prior authorizations, referrals, transition-of-care
+  management, and HCC risk-adjustment coding. Beacon advertises coverage of
+  AthenaHealth, Epic, Cerner, eClinicalWorks, MEDITECH, NextGen, Veradigm
+  Allscripts and MEDENT, plus payer portals and other web applications. Founded
+  in 2025 by Mark Pothen (CEO) and Obinna Akahara (CTO), the company operates as
+  a HIPAA Business Associate under a BAA with each covered entity. As of this
+  profile Beacon Health publishes no public developer API, developer portal, API
+  documentation, SDKs, or OpenAPI definition — the product is delivered as a
+  managed agent workforce, not as a self-serve API.
 url: https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.beaconhealth.ai/apple-touch-icon.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - y-combinator
 x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier-reason: no-public-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
+- Healthcare
+- Primary Care
+- Value Based Care
+- EHR
+- Artificial Intelligence
+- AI Agents
+- Workflow Automation
+- Risk Adjustment
+- Prior Authorization
+- HIPAA
+- Y Combinator
 apis: []
+common:
+- type: Website
+  url: https://www.beaconhealth.ai/
+- type: Login
+  url: https://www.beaconhealth.ai/login
+- type: TermsOfService
+  url: https://www.beaconhealth.ai/terms
+- type: PrivacyPolicy
+  url: https://www.beaconhealth.ai/privacy
+- type: Contact
+  url: https://form.typeform.com/to/mJ8w6Xot
+- type: Crunchbase
+  url: https://www.ycombinator.com/companies/beacon-health
+- type: LinkedIn
+  url: https://www.linkedin.com/company/beacon-health-ai/
+- type: WellKnown
+  url: well-known/beacon-health-well-known.yml
+- type: DomainSecurity
+  url: security/beacon-health-domain-security.yml
+- type: Authentication
+  url: authentication/beacon-health-authentication.yml
+- type: Conformance
+  url: conformance/beacon-health-conformance.yml
+- type: Compliance
+  url: conformance/beacon-health-conformance.yml
+- type: LLMsTxt
+  url: llms/beacon-health-llms.txt
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 7
+  pass: local-v1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -1,0 +1,106 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  Beacon Health homepage (https://www.beaconhealth.ai/), Privacy Policy
+  (https://www.beaconhealth.ai/privacy, last updated 2026-04-01), Terms of
+  Service (https://www.beaconhealth.ai/terms, last updated 2026-04-01), the live
+  OIDC discovery document at api.beaconhealth.ai, and DNS TXT records for
+  beaconhealth.ai.
+description: >-
+  Beacon Health publishes no OpenAPI definition and no public API, so nothing
+  here is derived from a spec. Every entry below is grounded in a claim the
+  company publishes on its own site or in a record observed live. Absence of a
+  claim is recorded as conforms:false with the reason, not as a failure.
+standards:
+  - id: hipaa
+    conforms: true
+    evidence: >-
+      Beacon Health states it processes Protected Health Information as a
+      Business Associate under HIPAA and maintains administrative, physical and
+      technical safeguards in accordance with the HIPAA Security Rule, with
+      obligations governed by a Business Associate Agreement executed with each
+      covered entity (Privacy Policy §4; Terms of Service §5). "HIPAA Compliant"
+      is also asserted on the homepage.
+  - id: hipaa-baa
+    conforms: true
+    evidence: >-
+      "Our obligations regarding PHI are detailed in the Business Associate
+      Agreement (BAA) executed with each covered entity." — Privacy Policy §4.
+      Subprocessors handling PHI are also placed under BAAs (Privacy Policy §5).
+  - id: oidc
+    conforms: partial
+    evidence: >-
+      api.beaconhealth.ai serves a valid /.well-known/openid-configuration with
+      an issuer and a working RSA JWKS, but the advertised
+      authorization_endpoint returns 404 and no token endpoint is published — it
+      is first-party application JWT metadata, not a usable OIDC provider for
+      third parties.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No reachable /oauth/authorize or /oauth/token, no
+      /.well-known/oauth-authorization-server, and no published client
+      registration or developer credentials.
+  - id: soc2
+    conforms: false
+    evidence: >-
+      No SOC 2 report, attestation, or trust center is published. A
+      "oneleet-domain-verification" TXT record on beaconhealth.ai indicates the
+      company is engaged with the Oneleet compliance/pentest platform, which is
+      consistent with a SOC 2 program in progress, but no attestation is publicly
+      available. Recorded as evidence of activity only, not as certification.
+  - id: iso-27001
+    conforms: false
+    evidence: No ISO 27001 certification published.
+  - id: pci-dss
+    conforms: false
+    evidence: Not applicable — Beacon Health does not process card payments.
+  - id: fhir
+    conforms: false
+    evidence: >-
+      Beacon Health explicitly does not integrate via healthcare data standards.
+      Its agents drive EHR user interfaces directly ("Beacon navigates and
+      operates real EHR systems, just like a human"), so there is no FHIR, HL7v2
+      or DICOM surface.
+  - id: hl7v2
+    conforms: false
+    evidence: See fhir — the integration model is UI automation, not data exchange.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No public API and no published error contract.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt returns 404 on both www.beaconhealth.ai and
+      api.beaconhealth.ai.
+  - id: dmarc
+    conforms: true
+    evidence: >-
+      _dmarc.beaconhealth.ai publishes "v=DMARC1; p=none; rua=mailto:
+      dmarc-reports@beaconhealth.healthcare; pct=100" — present but in
+      monitor-only mode (p=none), not enforcing.
+  - id: spf
+    conforms: false
+    evidence: No SPF record on beaconhealth.ai.
+  - id: dnssec
+    conforms: false
+    evidence: No DS record for beaconhealth.ai.
+  - id: caa
+    conforms: false
+    evidence: No CAA record for beaconhealth.ai.
+  - id: hsts
+    conforms: true
+    evidence: >-
+      www.beaconhealth.ai returns Strict-Transport-Security with max-age=63072000
+      (2 years) over TLSv1.3.
+compliance_program:
+  published: true
+  posture: >-
+    HIPAA Business Associate. Beacon Health publicly commits to HIPAA Security
+    Rule safeguards and executes a BAA with each covered entity. It publishes no
+    third-party audit attestation (SOC 2, ISO 27001, HITRUST) as of this profile.
+  url: https://www.beaconhealth.ai/privacy
+  certifications: []
+  contacts:
+    privacy: privacy@beaconhealth.ai
+    legal: legal@beaconhealth.ai
