@@ -13,10 +13,13 @@ description: >-
   AthenaHealth, Epic, Cerner, eClinicalWorks, MEDITECH, NextGen, Veradigm
   Allscripts and MEDENT, plus payer portals and other web applications. Founded
   in 2025 by Mark Pothen (CEO) and Obinna Akahara (CTO), the company operates as
-  a HIPAA Business Associate under a BAA with each covered entity. As of this
-  profile Beacon Health publishes no public developer API, developer portal, API
-  documentation, SDKs, or OpenAPI definition — the product is delivered as a
-  managed agent workforce, not as a self-serve API.
+  a HIPAA Business Associate under a BAA with each covered entity, and publishes
+  a trust center at trust.beaconhealth.ai carrying a 56-control monitored control
+  set, a named eight-vendor subprocessor list, and SOC 2 and HIPAA frameworks both
+  declared in progress with no completed attestation. As of this profile Beacon
+  Health publishes no public developer API, developer portal, API documentation,
+  SDKs, or OpenAPI definition — the product is delivered as a managed agent
+  workforce, not as a self-serve API.
 url: https://raw.githubusercontent.com/api-evangelist/beacon-health/refs/heads/main/apis.yml
 accessModel:
   pricing: unknown
@@ -39,7 +42,7 @@ x-tier: stub
 x-tier-reason: no-public-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-15'
 tags:
 - Company
 - Healthcare
@@ -78,14 +81,43 @@ common:
 - type: Conformance
   url: conformance/beacon-health-conformance.yml
 - type: Compliance
-  url: conformance/beacon-health-conformance.yml
+  url: https://trust.beaconhealth.ai/
+- type: TrustCenter
+  url: security/beacon-health-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/beacon-health-vulnerability-disclosure.yml
+- type: Security
+  url: security/beacon-health-vulnerability-disclosure.yml
+- type: Lifecycle
+  url: lifecycle/beacon-health-lifecycle.yml
 - type: LLMsTxt
   url: llms/beacon-health-llms.txt
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-15'
   status: enriched
-  artifacts_added: 7
+  artifacts_added: 6
   pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Beacon Health ships software but only as a managed service — contract
+    discovery probed 55 paths across www., api. and trust.beaconhealth.ai and
+    found no OpenAPI, GraphQL, MCP or agent card, because the company's stated
+    thesis is that its agents drive EHR user interfaces precisely where no usable
+    API exists.
+  evidence:
+    - url: https://api.beaconhealth.ai/openapi.json
+      status: 404
+    - url: https://www.beaconhealth.ai/docs
+      status: 404
+    - url: https://api.beaconhealth.ai/.well-known/agent-card.json
+      status: 404
+    - url: https://api.beaconhealth.ai/.well-known/openid-configuration
+      status: 200
+    - url: https://trust.beaconhealth.ai/
+      status: 200
+  checked: '2026-08-15'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
