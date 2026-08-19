@@ -1,0 +1,230 @@
+generated: '2026-08-15'
+method: searched
+source: https://trust.beaconhealth.ai/
+description: >-
+  Beacon Health publishes a trust center at https://trust.beaconhealth.ai/ — its
+  own subdomain, CNAMEd to trust.oneleet.com, so the page is Oneleet-hosted but
+  served under a Beacon Health domain the company controls. The page itself is a
+  client-side React SPA that returns a 604-byte HTML shell to any crawler; the
+  trust content is fetched at runtime from the Oneleet platform API. This
+  artifact records the content that page publishes, read from the same anonymous
+  endpoint the page itself calls
+  (https://api.oneleet.com/api/v1/tenants/trust.beaconhealth.ai/trust). That
+  endpoint is Oneleet's API, not Beacon Health's — it is recorded here only as
+  the read path for Beacon Health's own published trust data, and no contract is
+  attributed to Beacon Health from it.
+url: https://trust.beaconhealth.ai/
+hosting:
+  platform: Oneleet
+  platform_url: https://oneleet.com
+  dns: trust.beaconhealth.ai CNAME trust.oneleet.com
+  rendering: client-side SPA (no server-rendered trust content)
+  data_endpoint: https://api.oneleet.com/api/v1/tenants/trust.beaconhealth.ai/trust
+  data_endpoint_auth: none
+company_name: Beacon Health
+backlink: https://beaconhealth.ai
+contact:
+  security: security@beaconhealth.ai
+
+# Named certifications the trust center actually asserts. NOTE THE STATUS —
+# Beacon Health publishes NO completed attestation. Both frameworks are declared
+# IN_PROGRESS by the company itself, so this is a compliance program under way,
+# not a certification. Recorded verbatim rather than flattened to a cert list.
+certifications: []
+compliance_frameworks:
+  - id: soc2_v2
+    name: SOC 2
+    status: IN_PROGRESS
+    soc2_type: UNSET
+    note: >-
+      Declared in progress. No SOC 2 Type I or Type II report, attestation letter,
+      or auditor is named, and no report is downloadable from the trust center.
+  - id: hipaa_business_associate_v1
+    name: HIPAA (Business Associate)
+    status: IN_PROGRESS
+    note: >-
+      Declared in progress. Consistent with the HIPAA Business Associate posture
+      Beacon Health asserts in its Privacy Policy §4 and Terms of Service §5.
+
+# The trust center exposes a monitored control set with a pass/fail state per
+# control. 56 controls across 10 categories; 55 PASSING, 1 NEEDS_CHANGES.
+controls:
+  total: 56
+  passing: 55
+  needs_changes: 1
+  failing: 0
+  categories:
+    - category: ACCESS_CONTROL_AND_AUTHORIZATION
+      count: 7
+      passing: 7
+    - category: DATA_MANAGEMENT_AND_PROTECTION
+      count: 3
+      passing: 3
+    - category: DISASTER_RECOVERY
+      count: 2
+      passing: 2
+    - category: EMAIL_SECURITY
+      count: 3
+      passing: 3
+    - category: ENDPOINT_SECURITY
+      count: 5
+      passing: 5
+    - category: INFRASTRUCTURE_SECURITY
+      count: 6
+      passing: 6
+    - category: MONITORING_AND_INCIDENT_RESPONSE
+      count: 4
+      passing: 3
+    - category: ORGANIZATIONAL_SECURITY
+      count: 16
+      passing: 16
+    - category: RISK_MANAGEMENT
+      count: 6
+      passing: 6
+    - category: VULNERABILITY_MANAGEMENT
+      count: 4
+      passing: 4
+  not_passing:
+    - name: Adequate audit log storage maintained
+      category: MONITORING_AND_INCIDENT_RESPONSE
+      status: NEEDS_CHANGES
+      frameworks: [hipaa_business_associate_v1]
+  # Controls most load-bearing for an integrator's diligence, quoted by name.
+  notable_passing:
+    - name: Data encrypted at rest
+      category: DATA_MANAGEMENT_AND_PROTECTION
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: Data encrypted in-transit
+      category: DATA_MANAGEMENT_AND_PROTECTION
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: MFA required for critical services
+      category: ACCESS_CONTROL_AND_AUTHORIZATION
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: Penetration testing performed within the last 12 months
+      category: VULNERABILITY_MANAGEMENT
+      frameworks: [soc2_v2, hipaa_business_associate_v1]
+    - name: Penetration testing findings remediated
+      category: VULNERABILITY_MANAGEMENT
+      frameworks: [soc2_v2, hipaa_business_associate_v1]
+    - name: Vulnerability management policy established
+      category: VULNERABILITY_MANAGEMENT
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: HIPAA compliance policy established
+      category: RISK_MANAGEMENT
+      frameworks: [hipaa_business_associate_v1]
+    - name: Incident response policy established
+      category: MONITORING_AND_INCIDENT_RESPONSE
+      frameworks: [soc2_v2, hipaa_business_associate_v1]
+    - name: Automated backups enabled
+      category: DISASTER_RECOVERY
+      frameworks: [soc2_v2, hipaa_business_associate_v1]
+    - name: Business continuity and disaster recovery policy established
+      category: DISASTER_RECOVERY
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: Buckets not exposed publicly
+      category: INFRASTRUCTURE_SECURITY
+      frameworks: [hipaa_business_associate_v1, soc2_v2]
+    - name: Third-party security oversight conducted
+      category: ORGANIZATIONAL_SECURITY
+      frameworks: [soc2_v2]
+
+# Published subprocessor list — the most useful single disclosure on the page for
+# anyone doing PHI diligence, because it names which vendors touch patient data.
+subprocessors:
+  count: 8
+  processing_pii: 2
+  entries:
+    - name: Amazon Web Services
+      url: https://aws.amazon.com
+      purpose: Persistent large file storage
+      processes_pii: true
+      services: [Patient Documents]
+    - name: Convex
+      url: https://www.convex.dev
+      purpose: Backend as a service
+      processes_pii: true
+      services: [Application Data, Patient Data, Audit Logs]
+      note: >-
+        Matches the observed infrastructure — api.beaconhealth.ai is a CNAME to
+        convex.domains and serves the first-party application's OIDC discovery
+        document and JWKS.
+    - name: Anthropic
+      url: https://www.anthropic.com
+      purpose: AI Services
+      processes_pii: false
+      services: []
+    - name: OpenAI
+      url: https://openai.com
+      purpose: AI Services
+      processes_pii: false
+      services: []
+    - name: Google Cloud Platform
+      url: https://cloud.google.com
+      purpose: AI Services
+      processes_pii: false
+      services: []
+    - name: Google Workspace
+      url: https://workspace.google.com
+      purpose: Email and identity management
+      processes_pii: false
+      services: [Email]
+    - name: Slack
+      url: https://slack.com
+      purpose: Team communication
+      processes_pii: false
+      services: [Internal Messages]
+    - name: Tailscale
+      url: https://www.tailscale.com
+      purpose: VPN and network security
+      processes_pii: false
+      services: []
+
+documents:
+  count: 0
+  note: >-
+    The trust center publishes no downloadable documents (no SOC 2 report, no
+    policy pack, no pentest letter) and no document-request queue entries were
+    visible anonymously. Oneleet exposes a request flow
+    (/api/v1/tenants/{tenant}/request-trust-document) but there is nothing listed
+    to request.
+faqs:
+  count: 0
+
+# A SECOND trust center is linked from the company's own site and does not agree
+# with the first. Recorded rather than resolved — we cannot read the Delve page.
+second_trust_surface:
+  url: https://trust.delve.co/beacon-health
+  reached_via: https://www.beaconhealth.ai/security
+  redirect: >-
+    The Next.js route /security issues a server-side redirect
+    (NEXT_REDIRECT;replace;https://trust.delve.co/beacon-health;307) rather than
+    rendering a security page of its own.
+  http_status: 429
+  readable: false
+  note: >-
+    trust.delve.co is behind a Vercel Security Checkpoint bot challenge and
+    answered 429 to every request, including with a browser user-agent. We do not
+    evade challenges, so the Delve trust center's contents are unread. Beacon
+    Health therefore has two trust surfaces — an Oneleet one on its own subdomain
+    that nothing on the marketing site links to, and a Delve one that the site's
+    own /security route points at. Which is authoritative is undetermined.
+
+x-evidence:
+  fetched: '2026-08-15'
+  probes:
+    - url: https://trust.beaconhealth.ai/
+      http_status: 200
+      content_type: text/html
+      note: 604-byte SPA shell; no trust content in the served HTML
+    - url: https://api.oneleet.com/api/v1/tenants/trust.beaconhealth.ai/trust
+      http_status: 200
+      content_type: application/json
+      note: anonymous; the runtime data source for the page above
+    - url: https://www.beaconhealth.ai/security
+      http_status: 200
+      note: server-component 307 redirect to https://trust.delve.co/beacon-health
+    - url: https://trust.delve.co/beacon-health
+      http_status: 429
+      note: Vercel Security Checkpoint bot challenge
+    - url: https://www.beaconhealth.ai/.well-known/security.txt
+      http_status: 404

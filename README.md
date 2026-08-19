@@ -54,27 +54,53 @@ Founded in 2025 in San Francisco by Mark Pothen (CEO) and Obinna Akahara (CTO).
 
 ## API status
 
-Beacon Health publishes **no public developer API**. There is no developer portal, API documentation, API reference, OpenAPI or AsyncAPI definition, SDK, CLI, MCP server, public GitHub organization, changelog, status page, or pricing page. The product is delivered as a managed agent workforce through a sales/demo motion.
+Beacon Health publishes **no public developer API**. As of 2026-08-15 there is no developer portal, API documentation, API reference, OpenAPI or AsyncAPI definition, GraphQL endpoint, MCP server, A2A agent card, SDK in any public registry, CLI, changelog, status page, or pricing page. The product is delivered as a managed agent workforce through a sales/demo motion.
 
 Notably, Beacon Health's integration model is deliberately *not* API-based: its agents drive EHR user interfaces directly rather than exchanging data over FHIR or HL7v2. That is the company's core thesis — reaching systems that do not offer usable APIs.
 
-The application backend at `api.beaconhealth.ai` is a Convex-hosted service that serves a valid OIDC discovery document and JWKS for first-party application session auth. Its advertised `authorization_endpoint` returns 404 and there is no client registration, so it is not a third-party developer authorization server.
+The application backend at `api.beaconhealth.ai` is a Convex deployment (CNAME to `convex.domains`) that routes exactly two paths — `/.well-known/openid-configuration` and `/.well-known/jwks.json` — for first-party application session auth. Its advertised `authorization_endpoint` returns 404 and there is no client registration, so it is not a third-party developer authorization server. Everything else returns 404 `No matching routes found`.
+
+**Crawler caution.** `trust.beaconhealth.ai` answers HTTP 200 to *every* path with an identical 604-byte single-page-app HTML shell — including `/.well-known/agent-card.json`, `/openapi.json`, `/llms.txt` and `/.well-known/security.txt`. None of those is a document. Beacon Health serves no agent card and no security.txt.
 
 ## Artifacts in this repo
 
 | Artifact | Path | Method |
 |---|---|---|
-| Well-Known index | `well-known/beacon-health-well-known.yml` | searched (live probe) |
+| Well-Known index | `well-known/beacon-health-well-known.yml` | searched (55 paths, 3 hosts) |
 | OIDC discovery | `well-known/beacon-health-openid-configuration.json` | searched (verbatim, 200) |
 | JWKS | `well-known/beacon-health-jwks.json` | searched (verbatim, 200) |
 | Authentication | `authentication/beacon-health-authentication.yml` | searched |
 | Conformance / Compliance | `conformance/beacon-health-conformance.yml` | searched |
+| Trust center | `security/beacon-health-trust-center.yml` | searched |
+| Vulnerability disclosure | `security/beacon-health-vulnerability-disclosure.yml` | searched |
 | Domain security | `security/beacon-health-domain-security.yml` | probed |
+| Lifecycle | `lifecycle/beacon-health-lifecycle.yml` | searched (absence recorded) |
+| Packages | `packages/beacon-health-packages.yml` | searched (zero found) |
+| Plans / pricing | `plans/beacon-health-plans-pricing.yml` | searched (`plan_count: 0`) |
+| Rate limits | `rate-limits/beacon-health-rate-limits.yml` | searched (`limit_count: 0`) |
 | llms.txt | `llms/beacon-health-llms.txt` | generated |
 
 ## Compliance posture
 
-HIPAA Business Associate operating under a BAA with each covered entity; commits to HIPAA Security Rule safeguards. No published third-party audit attestation (no SOC 2, ISO 27001, or HITRUST report is publicly available), though a `oneleet-domain-verification` DNS TXT record suggests a compliance program in progress. No `security.txt` and no published vulnerability disclosure program.
+HIPAA Business Associate operating under a BAA with each covered entity; commits to HIPAA Security Rule safeguards.
+
+Since the previous pass Beacon Health has stood up a public **trust center** at <https://trust.beaconhealth.ai/> (its own subdomain, Oneleet-hosted — the live counterpart of the `oneleet-domain-verification` TXT record noted before). It publishes:
+
+- **SOC 2** — `IN_PROGRESS`, no Type I/II report, auditor, or attestation letter.
+- **HIPAA (Business Associate)** — `IN_PROGRESS`.
+- **56 monitored controls**, 55 `PASSING` and 1 `NEEDS_CHANGES` (*Adequate audit log storage maintained*, mapped to the HIPAA framework).
+- **8 named subprocessors**, 2 declared to process PII: AWS (Patient Documents) and Convex (Application Data, Patient Data, Audit Logs).
+- **No downloadable documents** — nothing to request or retrieve.
+
+There is still **no completed third-party attestation** of any kind. The trust center is client-side rendered, so none of the above is machine-readable from the served HTML.
+
+The site's own `/security` route 307-redirects to a *second* trust center at `https://trust.delve.co/beacon-health`, which sits behind a Vercel bot challenge (429) and could not be read. Two trust surfaces exist; only the Oneleet one is legible.
+
+A security contact (`security@beaconhealth.ai`) and a report-a-security-issue form are now published on the trust center — but there is no `security.txt`, no disclosure policy, and no bug bounty. A channel, not a policy.
+
+## A note on the GitHub organization
+
+<https://github.com/beaconhealthai> displays the name "Beacon Health" and was created April 2025, but **ownership is unconfirmed**: the YC profile and beaconhealth.ai link to no GitHub org, it has no public members, and its single repository is an unmodified fork of `cyberdesk-hq/cyberdriver` with no first-party commits. It is recorded as a candidate in `packages/` and deliberately **not** wired as a `GitHubOrganization` pointer.
 
 ## Disambiguation
 

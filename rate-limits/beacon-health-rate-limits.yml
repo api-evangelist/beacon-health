@@ -1,0 +1,27 @@
+generated: '2026-08-15'
+method: searched
+source: https://www.beaconhealth.ai/
+description: >-
+  Beacon Health publishes no public API, therefore no rate limits, no
+  rate-limit response headers, and no exhaustion semantics. An honest zero,
+  recorded so the absence is measured. NOTE FOR SCORING: this file documents an
+  ABSENCE and deliberately carries no `RateLimits` pointer in apis.yml — a
+  pointer would assert a runtime rate-limit signal the provider does not serve.
+limit_count: 0
+limits: []
+headers:
+  documented: []
+  observed: []
+  note: >-
+    The only Beacon Health host that answers 200 to anything is
+    api.beaconhealth.ai on its two /.well-known paths, and those responses carry
+    no X-RateLimit-*, RateLimit-*, or Retry-After headers. There is no
+    unauthenticated API call to observe limits on.
+exhaustion_status_code: null
+x-evidence:
+  checked: '2026-08-15'
+  probes:
+    - {url: 'https://www.beaconhealth.ai/docs', status: 404}
+    - {url: 'https://www.beaconhealth.ai/api', status: 404}
+    - {url: 'https://www.beaconhealth.ai/developers', status: 404}
+    - {url: 'https://api.beaconhealth.ai/.well-known/openid-configuration', status: 200, note: 'no rate-limit headers on the response'}

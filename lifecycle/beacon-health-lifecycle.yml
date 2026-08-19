@@ -1,0 +1,85 @@
+generated: '2026-08-15'
+method: searched
+source: >-
+  Probes of www.beaconhealth.ai, api.beaconhealth.ai and trust.beaconhealth.ai,
+  plus the published Terms of Service, Privacy Policy and SMS Terms.
+description: >-
+  Beacon Health ships no public API, so there is no API versioning scheme, no
+  deprecation policy, and no operation to mark deprecated. This artifact records
+  what WAS probed and found absent, so the absence is evidence rather than a
+  blank. The only lifecycle discipline the company publishes is on its legal
+  documents: each carries a "Last updated" date and each commits to notifying
+  users of material changes by posting the updated document and revising that
+  date.
+api_versioning:
+  scheme: none
+  current: null
+  note: >-
+    No public API exists to version. The first-party application backend
+    (api.beaconhealth.ai) is a Convex deployment routing only two /.well-known
+    paths; it exposes no versioned surface.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation or sunset policy is published. RFC 8594 Sunset/Deprecation
+    headers are not applicable — there is no API surface to send them on.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    Terms of Service §7 disclaims availability explicitly: the Services are
+    provided "as is" and "as available" and Beacon Health "does not warrant that
+    the Services will be uninterrupted, error-free, or secure". No uptime
+    commitment is published.
+status_page:
+  url: null
+  probed:
+    - {url: 'https://status.beaconhealth.ai/', status: null, note: 'DNS does not resolve'}
+    - {url: 'https://www.beaconhealth.ai/status', status: 404}
+changelog:
+  url: null
+  probed:
+    - {url: 'https://www.beaconhealth.ai/changelog', status: 404}
+    - {url: 'https://www.beaconhealth.ai/blog', status: 404}
+  note: No product changelog, release notes, or blog is published.
+roadmap:
+  url: null
+  note: No public roadmap.
+deprecated_operations: []
+# The one dated, versioned surface the company does maintain.
+document_versioning:
+  policy: >-
+    Each legal document carries a "Last updated" date and commits to notifying
+    users of material changes by posting the revised document and updating that
+    date (Terms of Service §10; Privacy Policy §12).
+  documents:
+    - name: Terms of Service
+      url: https://www.beaconhealth.ai/terms
+      last_updated: '2026-04-01'
+      governing_law: Commonwealth of Massachusetts
+    - name: Privacy Policy
+      url: https://www.beaconhealth.ai/privacy
+      last_updated: '2026-08-04'
+      note: >-
+        Updated since the 2026-07-20 pass, which recorded 2026-04-01. Section 6
+        (text messaging and mobile information) is new.
+    - name: SMS Terms & Messaging Policy
+      url: https://www.beaconhealth.ai/sms-terms
+      last_updated: '2026-07-30'
+      note: New page since the 2026-07-20 pass.
+    - name: SMS Opt-In
+      url: https://www.beaconhealth.ai/sms-opt-in
+      last_updated: null
+      note: New page since the 2026-07-20 pass. Patient consent capture form.
+x-evidence:
+  checked: '2026-08-15'
+  probes:
+    - {url: 'https://www.beaconhealth.ai/status', status: 404}
+    - {url: 'https://www.beaconhealth.ai/changelog', status: 404}
+    - {url: 'https://www.beaconhealth.ai/blog', status: 404}
+    - {url: 'https://www.beaconhealth.ai/docs', status: 404}
+    - {url: 'https://www.beaconhealth.ai/terms', status: 200}
+    - {url: 'https://www.beaconhealth.ai/privacy', status: 200}
+    - {url: 'https://www.beaconhealth.ai/sms-terms', status: 200}
+    - {url: 'https://www.beaconhealth.ai/sms-opt-in', status: 200}

@@ -1,13 +1,36 @@
-generated: '2026-07-20'
+generated: '2026-08-15'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+note: >-
+  www.beaconhealth.ai is probed mechanically by 0-working/probe-domain-security.py
+  from apis.yml. The api. and trust. hosts are not named in apis.yml (there is no
+  API entry), so they were probed by hand on the same date with the same method —
+  openssl s_client for TLS/cert, HTTP HEAD for HSTS.
 hosts:
 - host: www.beaconhealth.ai
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep  9 07:45:45 2026 GMT
+  cert_expires: Nov 10 09:56:16 2026 GMT
   hsts: true
   hsts_max_age: 63072000
+- host: api.beaconhealth.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  4 14:31:22 2026 GMT
+  hsts: false
+  hsts_max_age: null
+  role: application backend (Convex); serves OIDC discovery + JWKS
+  note: >-
+    No Strict-Transport-Security header on either the 404 root or the 200
+    /.well-known/openid-configuration response. Fronted by Cloudflare.
+- host: trust.beaconhealth.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 19 02:54:49 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  role: trust center (Oneleet)
 domains:
 - domain: beaconhealth.ai
   dnssec: false

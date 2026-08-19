@@ -1,17 +1,25 @@
-generated: '2026-07-20'
+generated: '2026-08-15'
 method: searched
 description: >-
-  Results of probing the /.well-known/ discovery surface for the Beacon Health
-  marketing host (www.beaconhealth.ai) and the application backend host
-  (api.beaconhealth.ai, a Convex-hosted backend identified by the convex-usher
-  response header). Status is the HTTP code observed at fetch time. The backend
-  host answers 200 on /.well-known/openid-configuration and
-  /.well-known/jwks.json with real JSON, which were saved verbatim. Note that
-  the issuer's advertised authorization_endpoint (/oauth/authorize) returns 404,
-  so this is JWT-verification metadata for the first-party application rather
-  than a public OAuth authorization server for third-party developers.
+  Results of probing the /.well-known/ discovery surface on every Beacon Health
+  host: the marketing site (www.beaconhealth.ai, Next.js on Vercel), the
+  application backend (api.beaconhealth.ai, a Convex deployment — the hostname is
+  a CNAME to convex.domains), and the trust center (trust.beaconhealth.ai, a
+  CNAME to trust.oneleet.com). Status is the HTTP code observed at fetch time on
+  2026-08-15.
+
+  Two documents are real: api.beaconhealth.ai serves
+  /.well-known/openid-configuration and /.well-known/jwks.json as genuine JSON,
+  saved verbatim. Everything else is a 404.
+
+  READ THE trust.beaconhealth.ai BLOCK CAREFULLY. That host answers HTTP 200 to
+  EVERY path — including /.well-known/agent-card.json, /openapi.json, /llms.txt
+  and /.well-known/security.txt — with the identical 604-byte client-side-app
+  HTML shell. Those are single-page-app catch-alls, not documents. Every one is
+  recorded below as a miss, and none of them produced an artifact or a pointer.
 hosts:
   - host: https://www.beaconhealth.ai
+    platform: Next.js on Vercel
     documents:
       - path: /.well-known/security.txt
         status: 404
@@ -19,9 +27,15 @@ hosts:
         status: 404
       - path: /.well-known/oauth-authorization-server
         status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
       - path: /.well-known/api-catalog
         status: 404
       - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
         status: 404
       - path: /llms.txt
         status: 404
@@ -29,7 +43,29 @@ hosts:
         status: 404
       - path: /sitemap.xml
         status: 404
+      - path: /openapi.json
+        status: 404
+      - path: /openapi.yaml
+        status: 404
+      - path: /swagger.json
+        status: 404
+      - path: /api-docs
+        status: 404
+      - path: /docs
+        status: 404
+      - path: /redoc
+        status: 404
+      - path: /mcp
+        status: 404
+      - path: /graphql
+        status: 404
+
   - host: https://api.beaconhealth.ai
+    platform: Convex (api.beaconhealth.ai CNAME convex.domains)
+    note: >-
+      A Convex HTTP-actions router. Root returns 404 "No matching routes found";
+      only the two OIDC paths below are routed. No Convex client API
+      (/api/query, /version, /instance_name) is exposed on this hostname.
     documents:
       - path: /.well-known/openid-configuration
         status: 200
@@ -49,12 +85,105 @@ hosts:
         status: 404
       - path: /.well-known/ai-plugin.json
         status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+      - path: /openapi.json
+        status: 404
+      - path: /openapi.yaml
+        status: 404
+      - path: /swagger.json
+        status: 404
+      - path: /api-docs
+        status: 404
+      - path: /docs
+        status: 404
+      - path: /redoc
+        status: 404
+      - path: /mcp
+        status: 404
+      - path: /graphql
+        status: 404
       - path: /oauth/authorize
         status: 404
         note: >-
           Advertised as authorization_endpoint in the OIDC discovery document but
-          not reachable.
+          not reachable. Unchanged since the 2026-07-20 probe.
       - path: /oauth/token
         status: 404
-      - path: /mcp
+      - path: /version
         status: 404
+      - path: /instance_name
+        status: 404
+      - path: /api/query
+        status: 404
+
+  - host: https://trust.beaconhealth.ai
+    platform: Oneleet trust center (trust.beaconhealth.ai CNAME trust.oneleet.com)
+    soft_200: true
+    note: >-
+      SPA CATCH-ALL. Every path below returned HTTP 200 with the same 604-byte
+      text/html application shell (etag "6a7e184e-25c"). None is a document. All
+      are recorded as misses and none earned a pointer of any kind — in
+      particular there is NO agent card here.
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/agent.json
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/security.txt
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /llms.txt
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /openapi.json
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /mcp
+        status: 200
+        result: miss
+        reason: html-spa-shell
+      - path: /graphql
+        status: 200
+        result: miss
+        reason: html-spa-shell
+
+summary:
+  real_documents: 2
+  hosts_probed: 3
+  paths_probed: 55
+  agent_card_found: false
+  security_txt_found: false
+  api_catalog_found: false
+  openapi_found: false

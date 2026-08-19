@@ -1,0 +1,32 @@
+generated: '2026-08-15'
+method: searched
+source: https://www.beaconhealth.ai/
+description: >-
+  Beacon Health publishes no pricing at all. There is no pricing page, no plan
+  tiers, no published rate card, and no machine-readable pricing endpoint. The
+  entire commercial motion is a "Book a Demo" Typeform. This is an honest zero,
+  recorded so the absence is measured rather than missing.
+plan_count: 0
+plans: []
+currency: null
+billing_model: contact-sales
+commercial_motion:
+  type: sales-led
+  entry_points:
+    - {label: 'Book a Demo', url: 'https://form.typeform.com/to/mJ8w6Xot', kind: typeform}
+    - {label: 'Contact (secondary form)', url: 'https://form.typeform.com/to/MMyyEs6v', kind: typeform}
+  self_serve_signup: false
+  free_tier: false
+  trial: false
+  note: >-
+    Access requires being "authorized by a subscribing healthcare organization"
+    (Terms of Service §3), so pricing is negotiated per organization. Liability is
+    capped at "the amount paid by your organization in the twelve months preceding
+    the claim" (ToS §8), which confirms a paid organizational contract exists but
+    names no figure.
+x-evidence:
+  checked: '2026-08-15'
+  probes:
+    - {url: 'https://www.beaconhealth.ai/pricing', status: 404}
+    - {url: 'https://www.beaconhealth.ai/', status: 200, note: 'no pricing link in nav or footer'}
+    - {url: 'https://www.beaconhealth.ai/terms', status: 200, note: 'ToS §8 references amounts paid but publishes no rate'}
