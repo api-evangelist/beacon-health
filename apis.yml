@@ -65,7 +65,7 @@ tags:
 - EHR
 - Artificial Intelligence
 - AI Agents
-- Workflow-Automation
+- Workflow Automation
 - Risk Adjustment
 - Prior Authorization
 - HIPAA
@@ -83,6 +83,7 @@ tags_raw:
 - Prior Authorization
 - HIPAA
 - Y Combinator
+- Workflow-Automation
 apis: []
 common:
 - type: Website
