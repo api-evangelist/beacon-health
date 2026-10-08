@@ -86,6 +86,10 @@ tags_raw:
 - Workflow-Automation
 apis: []
 common:
+- type: Plans
+  url: plans/beacon-health-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/beacon-health-rate-limits.yml
 - type: Website
   url: https://www.beaconhealth.ai/
 - type: Login
