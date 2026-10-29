@@ -64,66 +64,97 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Beacon Health (YC W26) builds "AI employees" for primary care — autonomous agents that operate directly inside electronic health record systems the way a human staff member does. A practice records an existing EHR workflow (navigation, clicks, data entry) and Beacon converts that recording into a reusable, deployable agent that runs at scale across the whole patient panel.
+Beacon Health (YC W26) is a San Francisco company building "AI employees" for primary care — autonomous agents that operate directly inside electronic health record systems the same way a human staff member does. Rather than integrating through an EHR vendor API, Beacon records a practice's existing workflow in the EHR (navigation, clicks, data entry) and converts that recording into a reusable, deployable agent that runs at scale across the whole patient panel. The agents automate value-based-care back-office work: preventative and quality gap closure, pre-charting, prior authorizations, referrals, transition-of-care management, and HCC risk-adjustment coding. Beacon advertises coverage of AthenaHealth, Epic, Cerner, eClinicalWorks, MEDITECH, NextGen, Veradigm Allscripts and MEDENT, plus payer portals and other web applications. Founded in 2025 by Mark Pothen (CEO) and Obinna Akahara (CTO), the company operates as a HIPAA Business Associate under a BAA with each covered entity, and publishes a trust center at trust.beaconhealth.ai carrying a 56-control monitored control set, a named eight-vendor subprocessor list, and SOC 2 and HIPAA frameworks both declared in progress with no completed attestation. As of this profile Beacon Health publishes no public developer API, developer portal, API documentation, SDKs, or OpenAPI definition — the product is delivered as a managed agent workforce, not as a self-serve API.
 
-The agents automate value-based-care back-office work: preventative and quality gap closure, pre-charting, prior authorizations, referrals, transition-of-care management, and HCC risk-adjustment coding. Advertised EHR coverage includes AthenaHealth, Epic, Cerner, eClinicalWorks, MEDITECH, NextGen, Veradigm Allscripts and MEDENT, plus payer portals and other web applications.
+**Areas:** Company · Healthcare · Primary Care · Value-Based Care · Electronic Health Records · Artificial Intelligence · AI Agents · Workflow Automation · Risk Adjustment · Prior Authorization · HIPAA · Y Combinator
 
-Founded in 2025 in San Francisco by Mark Pothen (CEO) and Obinna Akahara (CTO).
+## Beacon Health on APIs.io
 
-- Website: https://www.beaconhealth.ai/
-- Y Combinator: https://www.ycombinator.com/companies/beacon-health (Winter 2026)
-- Backed by: y-combinator
+Everything profiled for Beacon Health is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/beacon-health/](https://apis.io/providers/beacon-health/)** — or go straight to one of the APIs or properties below.
 
-## API status
+### Published properties
 
-Beacon Health publishes **no public developer API**. As of 2026-08-15 there is no developer portal, API documentation, API reference, OpenAPI or AsyncAPI definition, GraphQL endpoint, MCP server, A2A agent card, SDK in any public registry, CLI, changelog, status page, or pricing page. The product is delivered as a managed agent workforce through a sales/demo motion.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Notably, Beacon Health's integration model is deliberately *not* API-based: its agents drive EHR user interfaces directly rather than exchanging data over FHIR or HL7v2. That is the company's core thesis — reaching systems that do not offer usable APIs.
+#### Security (4)
 
-The application backend at `api.beaconhealth.ai` is a Convex deployment (CNAME to `convex.domains`) that routes exactly two paths — `/.well-known/openid-configuration` and `/.well-known/jwks.json` — for first-party application session auth. Its advertised `authorization_endpoint` returns 404 and there is no client registration, so it is not a third-party developer authorization server. Everything else returns 404 `No matching routes found`.
+Authentication, trust centre, and vulnerability disclosure.
 
-**Crawler caution.** `trust.beaconhealth.ai` answers HTTP 200 to *every* path with an identical 604-byte single-page-app HTML shell — including `/.well-known/agent-card.json`, `/openapi.json`, `/llms.txt` and `/.well-known/security.txt`. None of those is a document. Beacon Health serves no agent card and no security.txt.
+- [Beacon Health Authentication](https://apis.io/security/beacon-health/beacon-health-authentication/)
+- [Beacon Health Domain Security](https://apis.io/security/beacon-health/beacon-health-domain-security/)
+- [Beacon Health Trust Center](https://apis.io/security/beacon-health/beacon-health-trust-center/)
+- [Beacon Health Vulnerability Disclosure](https://apis.io/security/beacon-health/beacon-health-vulnerability-disclosure/)
 
-## Artifacts in this repo
+#### Plans and pricing (1)
 
-| Artifact | Path | Method |
-|---|---|---|
-| Well-Known index | `well-known/beacon-health-well-known.yml` | searched (55 paths, 3 hosts) |
-| OIDC discovery | `well-known/beacon-health-openid-configuration.json` | searched (verbatim, 200) |
-| JWKS | `well-known/beacon-health-jwks.json` | searched (verbatim, 200) |
-| Authentication | `authentication/beacon-health-authentication.yml` | searched |
-| Conformance / Compliance | `conformance/beacon-health-conformance.yml` | searched |
-| Trust center | `security/beacon-health-trust-center.yml` | searched |
-| Vulnerability disclosure | `security/beacon-health-vulnerability-disclosure.yml` | searched |
-| Domain security | `security/beacon-health-domain-security.yml` | probed |
-| Lifecycle | `lifecycle/beacon-health-lifecycle.yml` | searched (absence recorded) |
-| Packages | `packages/beacon-health-packages.yml` | searched (zero found) |
-| Plans / pricing | `plans/beacon-health-plans-pricing.yml` | searched (`plan_count: 0`) |
-| Rate limits | `rate-limits/beacon-health-rate-limits.yml` | searched (`limit_count: 0`) |
-| llms.txt | `llms/beacon-health-llms.txt` | generated |
+Published plans, tiers and prices.
 
-## Compliance posture
+- [Beacon Health Plans Pricing](https://apis.io/plans/beacon-health/beacon-health-plans-pricing/)
 
-HIPAA Business Associate operating under a BAA with each covered entity; commits to HIPAA Security Rule safeguards.
+#### Rate limits (1)
 
-Since the previous pass Beacon Health has stood up a public **trust center** at <https://trust.beaconhealth.ai/> (its own subdomain, Oneleet-hosted — the live counterpart of the `oneleet-domain-verification` TXT record noted before). It publishes:
+Published request limits.
 
-- **SOC 2** — `IN_PROGRESS`, no Type I/II report, auditor, or attestation letter.
-- **HIPAA (Business Associate)** — `IN_PROGRESS`.
-- **56 monitored controls**, 55 `PASSING` and 1 `NEEDS_CHANGES` (*Adequate audit log storage maintained*, mapped to the HIPAA framework).
-- **8 named subprocessors**, 2 declared to process PII: AWS (Patient Documents) and Convex (Application Data, Patient Data, Audit Logs).
-- **No downloadable documents** — nothing to request or retrieve.
+- [Beacon Health Rate Limits](https://apis.io/rate-limits/beacon-health/beacon-health-rate-limits/)
 
-There is still **no completed third-party attestation** of any kind. The trust center is client-side rendered, so none of the above is machine-readable from the served HTML.
+## Where to find this API
 
-The site's own `/security` route 307-redirects to a *second* trust center at `https://trust.delve.co/beacon-health`, which sits behind a Vercel bot challenge (429) and could not be read. Two trust surfaces exist; only the Oneleet one is legible.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-A security contact (`security@beaconhealth.ai`) and a report-a-security-issue form are now published on the trust center — but there is no `security.txt`, no disclosure policy, and no bug bounty. A channel, not a policy.
+- [Website](https://www.beaconhealth.ai/)
+- [Compliance](https://trust.beaconhealth.ai/)
+- [Terms of service](https://www.beaconhealth.ai/terms)
+- [Privacy policy](https://www.beaconhealth.ai/privacy)
 
-## A note on the GitHub organization
+## API Evangelist rating
 
-<https://github.com/beaconhealthai> displays the name "Beacon Health" and was created April 2025, but **ownership is unconfirmed**: the YC profile and beaconhealth.ai link to no GitHub org, it has no public members, and its single repository is an unmodified fork of `cyberdesk-hq/cyberdriver` with no first-party commits. It is recorded as a candidate in `packages/` and deliberately **not** wired as a `GitHubOrganization` pointer.
+**Kin Score 20.9** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-## Disambiguation
+| Facet | Score |
+|---|---|
+| Discoverability | 55.4 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 35.5 |
 
-Not to be confused with **Beacon Health System** (hospital network, South Bend, Indiana) or **Beacon Health Options** (behavioral health managed care). This profile covers only beaconhealth.ai, the Y Combinator W26 AI company.
+**Agent readiness 9.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.9** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/beacon-health/](https://apis.io/providers/beacon-health/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Beacon Health: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/beacon-health/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
